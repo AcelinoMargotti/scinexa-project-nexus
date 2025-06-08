@@ -2,38 +2,39 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, BookOpen, Calendar, Search, Bell, BarChart3 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const features = [
     {
       icon: Users,
-      title: "Role-Based Access",
-      description: "Separate dashboards for professors and students with tailored permissions"
+      title: "Controle de Acesso por Papel",
+      description: "Dashboards separados para professores e estudantes com permissões personalizadas"
     },
     {
       icon: BookOpen,
-      title: "Project Management",
-      description: "Create, manage, and track scientific initiation projects with ease"
+      title: "Gerenciamento de Projetos",
+      description: "Crie, gerencie e acompanhe projetos de iniciação científica com facilidade"
     },
     {
       icon: Calendar,
-      title: "Timeline Tracking",
-      description: "Monitor milestones and deadlines with integrated calendar views"
+      title: "Acompanhamento de Cronograma",
+      description: "Monitore marcos e prazos com visualizações de calendário integradas"
     },
     {
       icon: Search,
-      title: "Smart Filtering",
-      description: "Find projects quickly with advanced search and filter options"
+      title: "Filtragem Inteligente",
+      description: "Encontre projetos rapidamente com opções avançadas de busca e filtro"
     },
     {
       icon: Bell,
-      title: "Real-time Notifications",
-      description: "Stay updated with instant alerts on project changes and updates"
+      title: "Notificações em Tempo Real",
+      description: "Mantenha-se atualizado com alertas instantâneos sobre mudanças e atualizações"
     },
     {
       icon: BarChart3,
-      title: "Progress Analytics",
-      description: "Visual progress tracking with charts and completion metrics"
+      title: "Análise de Progresso",
+      description: "Acompanhamento visual do progresso com gráficos e métricas de conclusão"
     }
   ];
 
@@ -52,16 +53,16 @@ const Index = () => {
           </div>
           <div className="flex items-center space-x-4">
             <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
-              About
+              Sobre
             </Button>
             <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
-              Contact
+              Contato
             </Button>
-            <Button variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-              Login
+            <Button asChild variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+              <Link to="/auth">Entrar</Link>
             </Button>
-            <Button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
-              Get Started
+            <Button asChild className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
+              <Link to="/auth">Começar</Link>
             </Button>
           </div>
         </div>
@@ -71,20 +72,20 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-green-600 to-foreground bg-clip-text text-transparent">
-            Scientific Research
+            Pesquisa Científica
             <br />
-            <span className="text-green-600">Made Simple</span>
+            <span className="text-green-600">Simplificada</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            SciNexa connects professors and students in a seamless platform for managing scientific initiation projects. 
-            Track progress, collaborate effectively, and achieve research excellence.
+            SciNexa conecta professores e estudantes em uma plataforma integrada para gerenciar projetos de iniciação científica. 
+            Acompanhe o progresso, colabore efetivamente e alcance a excelência em pesquisa.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-lg px-8">
-              Start Your Research Journey
+            <Button asChild size="lg" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-lg px-8">
+              <Link to="/auth">Iniciar Sua Jornada de Pesquisa</Link>
             </Button>
             <Button size="lg" variant="outline" className="text-lg px-8 border-green-600 text-green-600 hover:bg-green-50">
-              Learn More
+              Saiba Mais
             </Button>
           </div>
         </div>
@@ -94,10 +95,10 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Everything You Need for Research Management
+            Tudo o Que Você Precisa para Gerenciar Pesquisas
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Powerful features designed specifically for academic research collaboration
+            Recursos poderosos projetados especificamente para colaboração em pesquisa acadêmica
           </p>
         </div>
         
@@ -121,10 +122,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Built for Both Professors and Students
+              Construído para Professores e Estudantes
             </h2>
             <p className="text-xl text-muted-foreground">
-              Tailored experiences for different roles in scientific research
+              Experiências personalizadas para diferentes papéis na pesquisa científica
             </p>
           </div>
           
@@ -135,24 +136,24 @@ const Index = () => {
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mr-4">
                     <Users className="w-6 h-6 text-blue-600" />
                   </div>
-                  <h3 className="text-2xl font-bold">For Professors</h3>
+                  <h3 className="text-2xl font-bold">Para Professores</h3>
                 </div>
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Create and manage multiple research projects
+                    Criar e gerenciar múltiplos projetos de pesquisa
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Add students and secondary professors
+                    Adicionar estudantes e professores secundários
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Track student progress and milestones
+                    Acompanhar progresso e marcos dos estudantes
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Manage project completion status
+                    Gerenciar status de conclusão dos projetos
                   </li>
                 </ul>
               </CardContent>
@@ -164,24 +165,24 @@ const Index = () => {
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mr-4">
                     <BookOpen className="w-6 h-6 text-purple-600" />
                   </div>
-                  <h3 className="text-2xl font-bold">For Students</h3>
+                  <h3 className="text-2xl font-bold">Para Estudantes</h3>
                 </div>
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    View and update project milestones
+                    Visualizar e atualizar marcos do projeto
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Track research progress visually
+                    Acompanhar progresso da pesquisa visualmente
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Collaborate with professors effectively
+                    Colaborar efetivamente com professores
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Receive notifications on updates
+                    Receber notificações sobre atualizações
                   </li>
                 </ul>
               </CardContent>
@@ -194,13 +195,13 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Transform Your Research Process?
+            Pronto para Transformar Seu Processo de Pesquisa?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join professors and students who are already using SciNexa to streamline their scientific research projects.
+            Junte-se aos professores e estudantes que já estão usando o SciNexa para otimizar seus projetos de pesquisa científica.
           </p>
-          <Button size="lg" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-lg px-8">
-            Get Started Today
+          <Button asChild size="lg" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-lg px-8">
+            <Link to="/auth">Comece Hoje</Link>
           </Button>
         </div>
       </section>
@@ -216,7 +217,7 @@ const Index = () => {
               <span className="text-lg font-bold text-green-600">SciNexa</span>
             </div>
             <p className="text-muted-foreground text-sm">
-              © 2024 SciNexa. Empowering scientific research collaboration.
+              © 2024 SciNexa. Potencializando a colaboração em pesquisa científica.
             </p>
           </div>
         </div>
