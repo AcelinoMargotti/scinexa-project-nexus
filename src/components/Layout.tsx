@@ -36,8 +36,8 @@ const Layout = ({ children }: LayoutProps) => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted w-full">
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-background via-background to-muted">
         <Sidebar>
           <SidebarHeader className="border-b bg-background/80">
             <div className="flex items-center space-x-2 p-4">
@@ -84,7 +84,7 @@ const Layout = ({ children }: LayoutProps) => {
           )}
         </Sidebar>
 
-        <SidebarInset>
+        <SidebarInset className="flex-1">
           {/* Header */}
           <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
             <div className="flex items-center justify-between px-4 py-4">
@@ -110,7 +110,7 @@ const Layout = ({ children }: LayoutProps) => {
           </header>
 
           {/* Main Content */}
-          <main className="flex-1 p-4 md:p-6">
+          <main className="flex-1 p-4 md:p-6 overflow-auto">
             {children}
           </main>
         </SidebarInset>

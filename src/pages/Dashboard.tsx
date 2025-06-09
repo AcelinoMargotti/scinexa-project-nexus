@@ -1,6 +1,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import Layout from '@/components/Layout';
+import DashboardCalendar from '@/components/DashboardCalendar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, BookOpen, Calendar, TrendingUp } from 'lucide-react';
 
@@ -81,6 +82,9 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Calendar Section */}
+        <DashboardCalendar />
 
         {/* Recent Activity */}
         <Card>
