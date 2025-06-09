@@ -2,7 +2,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
-import { Home, Calendar, BookOpen, Plus } from 'lucide-react';
+import { Home, Calendar, BookOpen, Plus, LogOut, LogIn } from 'lucide-react';
 import NotificationSystem from './NotificationSystem';
 import {
   Sidebar,
@@ -24,7 +24,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { profile } = useAuth();
+  const { profile, user, signOut } = useAuth();
   const location = useLocation();
 
   const navigation = [
@@ -34,6 +34,10 @@ const Layout = ({ children }: LayoutProps) => {
   ];
 
   const isActive = (href: string) => location.pathname === href;
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <SidebarProvider defaultOpen={false}>
@@ -102,9 +106,33 @@ const Layout = ({ children }: LayoutProps) => {
               
               <div className="flex items-center space-x-4">
                 <NotificationSystem />
-                <span className="text-sm text-muted-foreground hidden sm:block">
-                  Olá, {profile?.full_name}
-                </span>
+                {user ? (
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm text-muted-foreground hidden sm:block">
+                      Olá, {profile?.full_name}
+                    </span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleSignOut}
+                      className="flex items-center space-x-2"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span className="hidden sm:block">Sair</span>
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth">
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="flex items-center space-x-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+                    >
+                      <LogIn className="h-4 w-4" />
+                      <span className="hidden sm:block">Entrar</span>
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </header>

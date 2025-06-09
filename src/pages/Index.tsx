@@ -1,15 +1,9 @@
 
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Redirecionar automaticamente para o dashboard
-    navigate('/dashboard');
-  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
@@ -38,7 +32,15 @@ const Index = () => {
             className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
             onClick={() => navigate('/dashboard')}
           >
-            Acessar Dashboard
+            Explorar Plataforma
+          </Button>
+          
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => navigate('/auth')}
+          >
+            Fazer Login
           </Button>
         </div>
       </div>

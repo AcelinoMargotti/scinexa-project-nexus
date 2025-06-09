@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ import { toast } from '@/hooks/use-toast';
 const Auth = () => {
   const { user, signUp, signIn } = useAuth();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Redirect if already authenticated
   if (user) {
@@ -63,6 +64,12 @@ const Auth = () => {
         description: error.message,
         variant: 'destructive'
       });
+    } else {
+      toast({
+        title: 'Login realizado!',
+        description: 'Bem-vindo de volta!'
+      });
+      navigate('/dashboard');
     }
 
     setLoading(false);

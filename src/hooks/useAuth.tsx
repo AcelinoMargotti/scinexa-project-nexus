@@ -18,42 +18,86 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock user para desenvolvimento
-const mockUser: User = {
-  id: 'mock-professor-id',
-  email: 'professor@test.com',
-  created_at: new Date().toISOString(),
-  updated_at: new Date().toISOString(),
-  app_metadata: {},
-  user_metadata: {},
-  aud: 'authenticated'
-} as User;
-
-const mockProfile: Profile = {
-  id: 'mock-professor-id',
-  email: 'professor@test.com',
-  full_name: 'Professor Mock',
-  role: 'professor',
-  created_at: new Date().toISOString(),
-  updated_at: new Date().toISOString()
-};
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(mockUser);
-  const [profile, setProfile] = useState<Profile | null>(mockProfile);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          // Fetch user profile
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+          
+          setProfile(profileData);
+        } else {
+          setProfile(null);
+        }
+        
+        setLoading(false);
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        // Fetch user profile
+        supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single()
+          .then(({ data: profileData }) => {
+            setProfile(profileData);
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const signUp = async (email: string, password: string, fullName: string, role: 'professor' | 'student') => {
-    return { error: null };
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+          role: role
+        }
+      }
+    });
+    
+    return { error };
   };
 
   const signIn = async (email: string, password: string) => {
-    return { error: null };
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+    
+    return { error };
   };
 
   const signOut = async () => {
-    // Mock sign out
+    await supabase.auth.signOut();
   };
 
   return (
