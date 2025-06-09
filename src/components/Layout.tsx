@@ -1,23 +1,23 @@
-
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
-import { Home, Calendar, BookOpen, Plus, LogOut, LogIn } from 'lucide-react';
+import { LogIn, LogOut, Home, BookOpen, Calendar, Plus } from 'lucide-react';
 import NotificationSystem from './NotificationSystem';
+import { ThemeToggle } from './ThemeToggle';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
-  SidebarProvider,
+  SidebarMenuButton,
+  SidebarGroup,
+  SidebarGroupContent,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+  SidebarProvider,
+} from '@/components/ui/sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -88,10 +88,9 @@ const Layout = ({ children }: LayoutProps) => {
           )}
         </Sidebar>
 
-        <SidebarInset className="flex-1">
-          {/* Header */}
+        <SidebarInset>
           <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
-            <div className="flex items-center justify-between px-4 py-4">
+            <div className="flex h-16 items-center px-4 md:px-6">
               <div className="flex items-center space-x-4">
                 <SidebarTrigger />
                 <div className="md:hidden flex items-center space-x-2">
@@ -103,8 +102,9 @@ const Layout = ({ children }: LayoutProps) => {
                   </span>
                 </div>
               </div>
-              
+              <div className="flex-1" />
               <div className="flex items-center space-x-4">
+                <ThemeToggle />
                 <NotificationSystem />
                 {user ? (
                   <div className="flex items-center space-x-3">
