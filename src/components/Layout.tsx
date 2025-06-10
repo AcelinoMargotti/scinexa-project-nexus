@@ -19,6 +19,7 @@ import {
   SidebarProvider,
 } from '@/components/ui/sidebar';
 import Logo from '@/components/Logo';
+import { motion, AnimatePresence } from "framer-motion";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -43,52 +44,74 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <SidebarProvider defaultOpen={false}>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-background via-background to-muted">
-        <Sidebar>
-          <SidebarHeader className="border-b bg-background/80">
-            <div className="flex items-center space-x-2 p-4">
-              <Logo size="md" />
-              <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                SciNexa
-              </span>
-            </div>
-          </SidebarHeader>
+        <AnimatePresence mode="wait">
+          <motion.div
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 30,
+            }}
+          >
+            <Sidebar>
+              <SidebarHeader className="border-b bg-background/80">
+                <div className="flex items-center space-x-2 p-4">
+                  <Logo size="md" />
+                  <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+                    SciNexa
+                  </span>
+                </div>
+              </SidebarHeader>
 
-          <SidebarContent>
-            <SidebarGroup>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {navigation.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <SidebarMenuItem key={item.name}>
-                        <SidebarMenuButton asChild isActive={isActive(item.href)}>
-                          <Link to={item.href}>
-                            <Icon className="h-5 w-5" />
-                            <span>{item.name}</span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    );
-                  })}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          </SidebarContent>
+              <SidebarContent>
+                <SidebarGroup>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {navigation.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <SidebarMenuItem key={item.name}>
+                            <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                              <Link to={item.href}>
+                                <Icon className="h-5 w-5" />
+                                <span>{item.name}</span>
+                              </Link>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              </SidebarContent>
 
-          {profile?.role === 'professor' && (
-            <SidebarFooter className="border-t p-4">
-              <Link to="/projects/new">
-                <Button className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Novo Projeto
-                </Button>
-              </Link>
-            </SidebarFooter>
-          )}
-        </Sidebar>
+              {profile?.role === 'professor' && (
+                <SidebarFooter className="border-t p-4">
+                  <Link to="/projects/new">
+                    <Button className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Novo Projeto
+                    </Button>
+                  </Link>
+                </SidebarFooter>
+              )}
+            </Sidebar>
+          </motion.div>
+        </AnimatePresence>
 
         <SidebarInset>
-          <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+          <motion.header
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 30,
+            }}
+            className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50"
+          >
             <div className="flex h-16 items-center px-4 md:px-6">
               <div className="flex items-center space-x-4">
                 <SidebarTrigger />
@@ -132,12 +155,20 @@ const Layout = ({ children }: LayoutProps) => {
                 )}
               </div>
             </div>
-          </header>
+          </motion.header>
 
-          {/* Main Content */}
-          <main className="flex-1 p-4 md:p-6 overflow-auto">
+          <motion.main
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 30,
+            }}
+            className="flex-1 p-4 md:p-6 overflow-auto"
+          >
             {children}
-          </main>
+          </motion.main>
         </SidebarInset>
       </div>
     </SidebarProvider>
