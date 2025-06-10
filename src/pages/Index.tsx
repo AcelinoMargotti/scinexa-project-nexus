@@ -1,6 +1,6 @@
-
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import Logo from '@/components/Logo';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -9,9 +9,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <div className="flex items-center justify-center space-x-2 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-xl">SN</span>
-          </div>
+          <Logo size="lg" />
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
             SciNexa
           </h1>

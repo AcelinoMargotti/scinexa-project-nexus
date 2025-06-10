@@ -18,6 +18,7 @@ import {
   SidebarTrigger,
   SidebarProvider,
 } from '@/components/ui/sidebar';
+import Logo from '@/components/Logo';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -45,9 +46,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Sidebar>
           <SidebarHeader className="border-b bg-background/80">
             <div className="flex items-center space-x-2 p-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SN</span>
-              </div>
+              <Logo size="md" />
               <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
                 SciNexa
               </span>
@@ -94,9 +93,7 @@ const Layout = ({ children }: LayoutProps) => {
               <div className="flex items-center space-x-4">
                 <SidebarTrigger />
                 <div className="md:hidden flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-gradient-to-br from-green-600 to-green-700 rounded flex items-center justify-center">
-                    <span className="text-white font-bold text-xs">SN</span>
-                  </div>
+                  <Logo size="sm" />
                   <span className="text-lg font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
                     SciNexa
                   </span>
