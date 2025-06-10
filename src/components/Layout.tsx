@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/sidebar';
 import Logo from '@/components/Logo';
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { profile, user, signOut } = useAuth();
   const location = useLocation();
+  const isMobile = useIsMobile();
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -42,7 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={!isMobile}>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-background via-background to-muted">
         <AnimatePresence mode="wait">
           <motion.div
@@ -57,11 +59,8 @@ const Layout = ({ children }: LayoutProps) => {
           >
             <Sidebar>
               <SidebarHeader className="border-b bg-background/80">
-                <div className="flex items-center space-x-2 p-4">
-                  <Logo size="md" />
-                  <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                    SciNexa
-                  </span>
+                <div className="p-4">
+                  <Logo size="md" linkTo="/dashboard" />
                 </div>
               </SidebarHeader>
 
@@ -115,11 +114,8 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="flex h-16 items-center px-4 md:px-6">
               <div className="flex items-center space-x-4">
                 <SidebarTrigger />
-                <div className="md:hidden flex items-center space-x-2">
-                  <Logo size="sm" />
-                  <span className="text-lg font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                    SciNexa
-                  </span>
+                <div className="md:hidden">
+                  <Logo size="sm" linkTo="/dashboard" />
                 </div>
               </div>
               <div className="flex-1" />

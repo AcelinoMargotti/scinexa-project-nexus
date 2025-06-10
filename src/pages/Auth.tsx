@@ -84,11 +84,8 @@ const Auth = () => {
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Logo size="md" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                SciNexa
-              </span>
+            <div className="flex items-center justify-center mb-4">
+              <Logo size="md" showText={true} />
             </div>
             <CardTitle>Bem-vindo ao SciNexa</CardTitle>
             <CardDescription>

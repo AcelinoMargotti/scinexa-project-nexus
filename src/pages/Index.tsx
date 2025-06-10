@@ -10,11 +10,8 @@ const Index = () => {
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-8">
-            <Logo size="lg" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-              SciNexa
-            </h1>
+          <div className="flex items-center justify-center mb-8">
+            <Logo size="lg" showText={true} />
           </div>
           
           <h2 className="text-3xl font-bold text-foreground mb-4">
