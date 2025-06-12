@@ -1,8 +1,8 @@
-
 import { useState, useEffect, createContext, useContext } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { Database } from '@/integrations/supabase/types';
+import { LOCAL_USERS } from '../data/localUsers';
 
 type Profile = Database['public']['Tables']['profiles']['Row'];
 
@@ -87,7 +87,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error };
   };
 
+  const isLocalUser = (email: string, password: string) => {
+    return LOCAL_USERS.find(
+      (u) => u.email === email && u.password === password
+    );
+  };
+
   const signIn = async (email: string, password: string) => {
+    // Try local credentials first
+    const localUser = isLocalUser(email, password);
+    if (localUser) {
+      setUser({
+        id: 'local-' + localUser.email,
+        email: localUser.email,
+        user_metadata: {
+          full_name: localUser.full_name,
+          role: localUser.role,
+        },
+        aud: '',
+        created_at: '',
+        app_metadata: {},
+        email_confirmed_at: '',
+        phone: '',
+        confirmed_at: '',
+        last_sign_in_at: '',
+        role: '',
+        identities: [],
+      } as any);
+      setProfile({
+        id: 'local-' + localUser.email,
+        full_name: localUser.full_name,
+        role: localUser.role,
+        email: localUser.email,
+      } as any);
+      setSession(null);
+      return { error: null };
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password

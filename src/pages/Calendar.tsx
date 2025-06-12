@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -141,14 +140,42 @@ const Calendar = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <CalendarComponent
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  month={currentMonth}
-                  onMonthChange={setCurrentMonth}
-                  className="rounded-md border"
-                />
+                <div className="flex flex-col lg:flex-row gap-6">
+                  {/* Calendário */}
+                  <div className="flex-shrink-0">
+                    <CalendarComponent
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={setSelectedDate}
+                      month={currentMonth}
+                      onMonthChange={setCurrentMonth}
+                      className="rounded-md border"
+                    />
+                  </div>
+                  {/* Detalhes dos eventos do dia selecionado */}
+                  <div className="flex-1 min-w-[220px]">
+                    <h3 className="font-semibold mb-2 text-lg">Detalhes do dia</h3>
+                    {selectedDate && getEventsForDate(selectedDate).length > 0 ? (
+                      <ul className="space-y-3">
+                        {getEventsForDate(selectedDate).map(event => (
+                          <li key={event.id} className="p-3 border rounded-lg flex flex-col gap-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className={`w-2 h-2 rounded-full ${getEventTypeColor(event.type)}`}></span>
+                              <span className="font-medium text-sm">{event.title}</span>
+                            </div>
+                            <span className="text-xs text-muted-foreground">Projeto: {event.project}</span>
+                            <span className="text-xs text-muted-foreground">Tipo: {getEventTypeName(event.type)}</span>
+                            <span className="text-xs text-muted-foreground">Status: {event.status === 'pending' ? 'Pendente' : event.status === 'completed' ? 'Concluído' : 'Atrasado'}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center h-full min-h-[120px]">
+                        <span className="text-sm text-muted-foreground text-center">Nenhum evento para este dia</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
@@ -235,6 +262,18 @@ const Calendar = () => {
                     <span className="text-sm">Reuniões</span>
                   </div>
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Card decorativo/informativo */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Dica</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Use o calendário para planejar suas atividades e acompanhar prazos importantes dos seus projetos. Clique em uma data para ver os eventos do dia!
+                </p>
               </CardContent>
             </Card>
           </div>
